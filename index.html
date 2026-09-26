@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Robotic Escape Code</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top, #123b70 0%, #061426 45%, #020812 100%);
+            color: white;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: rgba(8, 24, 43, 0.96);
+            border: 2px solid #1685ff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow:
+                0 0 25px rgba(0, 132, 255, 0.35),
+                inset 0 0 30px rgba(0, 132, 255, 0.05);
+        }
+
+        .robot {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 34px;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #ffc928;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .instruction {
+            color: #b9c8d9;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .code-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .code-input {
+            width: 55px;
+            height: 65px;
+            border: 2px solid #287fd3;
+            border-radius: 10px;
+            background: #07172b;
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            outline: none;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .code-input:focus {
+            border-color: #ffc928;
+            box-shadow: 0 0 12px rgba(255, 201, 40, 0.5);
+            transform: translateY(-2px);
+        }
+
+        button {
+            width: 100%;
+            max-width: 350px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #ffc928;
+            color: #101820;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ffda55;
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            display: none;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .result.success {
+            display: block;
+            background: rgba(20, 180, 100, 0.15);
+            border: 2px solid #20c77a;
+            color: #5dffa9;
+        }
+
+        .result.error {
+            display: block;
+            background: rgba(255, 60, 60, 0.12);
+            border: 2px solid #ff5555;
+            color: #ff8585;
+        }
+
+        .retry {
+            display: none;
+            margin: 15px auto 0;
+            max-width: 200px;
+            background: transparent;
+            color: white;
+            border: 1px solid #55718e;
+            font-size: 14px;
+        }
+
+        .retry:hover {
+            background: #142c47;
+        }
+
+        .status {
+            margin-top: 25px;
+            color: #6d89a5;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .code-inputs {
+                gap: 6px;
+            }
+
+            .code-input {
+                width: 42px;
+                height: 55px;
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="robot">🤖</div>
+
+    <h1>ROBOTIC ESCAPE CODE</h1>
+
+    <div class="subtitle">
+        🔐 SISTEM TERKUNCI
+    </div>
+
+    <p class="instruction">
+        Masukkan 8 karakter rahasia yang telah kamu temukan
+        dari Misi 01 sampai Misi 08.
+    </p>
+
+    <div class="code-inputs">
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="0"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="1"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="2"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="3"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="4"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="5"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="6"
+            autocomplete="off"
+        >
+
+        <input
+            type="text"
+            class="code-input"
+            maxlength="1"
+            data-index="7"
+            autocomplete="off"
+        >
+
+    </div>
+
+    <button onclick="checkCode()">
+        🔓 BUKA SISTEM
+    </button>
+
+    <div id="result" class="result"></div>
+
+    <button
+        id="retryButton"
+        class="retry"
+        onclick="resetCode()"
+    >
+        ↻ COBA LAGI
+    </button>
+
+    <div class="status">
+        SYSTEM STATUS : WAITING FOR CODE...
+    </div>
+
+</div>
+
+
+<script>
+
+    // ==========================================
+    // KODE RAHASIA
+    // ==========================================
+
+    const correctCode = "252688KH";
+
+
+    // ==========================================
+    // INPUT CODE
+    // ==========================================
+
+    const inputs = document.querySelectorAll(".code-input");
+
+
+    inputs.forEach((input, index) => {
+
+        // Saat mengetik
+        input.addEventListener("input", function () {
+
+            this.value = this.value
+                .replace(/[^a-zA-Z0-9]/g, "")
+                .toUpperCase();
+
+            // Pindah otomatis ke kotak berikutnya
+            if (this.value && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+
+        });
+
+
+        // Tombol keyboard
+        input.addEventListener("keydown", function (event) {
+
+            // Backspace kembali ke input sebelumnya
+            if (
+                event.key === "Backspace" &&
+                this.value === "" &&
+                index > 0
+            ) {
+                inputs[index - 1].focus();
+            }
+
+            // Enter untuk mengecek kode
+            if (event.key === "Enter") {
+                checkCode();
+            }
+
+        });
+
+    });
+
+
+    // ==========================================
+    // CEK KODE
+    // ==========================================
+
+    function checkCode() {
+
+        let enteredCode = "";
+
+        inputs.forEach(input => {
+            enteredCode += input.value.toUpperCase();
+        });
+
+
+        const result = document.getElementById("result");
+        const retryButton = document.getElementById("retryButton");
+
+
+        // Belum lengkap
+        if (enteredCode.length < 8) {
+
+            result.className = "result error";
+
+            result.innerHTML = `
+                ⚠️ KODE BELUM LENGKAP!<br>
+                Pastikan semua 8 karakter sudah diisi.
+            `;
+
+            retryButton.style.display = "block";
+
+            return;
+        }
+
+
+        // ==========================================
+        // KODE BENAR
+        // ==========================================
+
+        if (enteredCode === correctCode) {
+
+            result.className = "result success";
+
+            result.innerHTML = `
+                🎉 KODE BENAR!<br>
+                SISTEM BERHASIL DIBUKA!<br><br>
+                🤖 SELAMAT, KAMU BERHASIL MENYELESAIKAN
+                ROBOTIC ESCAPE CODE!
+            `;
+
+            retryButton.style.display = "none";
+
+            // Nonaktifkan input
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+
+        }
+
+
+        // ==========================================
+        // KODE SALAH
+        // ==========================================
+
+        else {
+
+            result.className = "result error";
+
+            result.innerHTML = `
+                ❌ KODE SALAH!<br>
+                Periksa kembali jawaban dari
+                Misi 01 sampai Misi 08.
+            `;
+
+            retryButton.style.display = "block";
+
+        }
+
+    }
+
+
+    // ==========================================
+    // RESET
+    // ==========================================
+
+    function resetCode() {
+
+        inputs.forEach(input => {
+            input.value = "";
+            input.disabled = false;
+        });
+
+        const result = document.getElementById("result");
+
+        result.style.display = "none";
+        result.className = "result";
+        result.innerHTML = "";
+
+        document.getElementById("retryButton").style.display = "none";
+
+        inputs[0].focus();
+    }
+
+</script>
+
+</body>
+</html>
